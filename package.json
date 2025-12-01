@@ -1,0 +1,55 @@
+{
+  "version": "0.0.1",
+  "name": "@tomheten/browser-control-tool",
+  "author": {
+    "name": "Boris Medoshin",
+    "url": "https://github.com/Tomheten"
+  },
+  "license": "MIT",
+  "main": "dist/browser-control-tool.umd.js",
+  "module": "dist/browser-control-tool.es.js",
+  "types": "dist/index.d.ts",
+  "contributors": [
+    {
+      "name": "Boris Prokhorov",
+      "url": "https://github.com/lixonik"
+    }
+  ],
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "keywords": [
+    "vite",
+    "typescript",
+    "library",
+    "browser",
+    "playwright"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest run",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write ."
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "prettier": "^3.7.3",
+    "typescript": "^5.9.0",
+    "vite": "^7.2.4",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.0.14"
+  }
+}
