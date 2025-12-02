@@ -1,0 +1,41 @@
+<!--
+  * ****************************************************************************
+  * Copyright (C), 2025, KNS Group LLC (YADRO).
+  * All Rights Reserved.
+  *
+  * This software contains the intellectual property of YADRO or is licensed to
+  * YADRO from third parties. Use of this software and the intellectual property
+  * contained therein is expressly limited to the terms and conditions of the
+  * License Agreement under which it is provided by YADRO.
+  * ****************************************************************************
+  -->
+
+<body>
+<button id="http-response-btn">fetch http</button>
+<h3 id="http-response-result"></h3>
+
+<button id="http-secure-response-btn">fetch http secure</button>
+<h3 id="http-secure-response-result"></h3>
+
+<script>
+    /** @type {Array<{host: string; endpoint: string}>} */
+    const arr = [
+        { host: 'http://localhost:3001', endpoint: 'http-response' },
+        { host: 'https://localhost:3002', endpoint: 'http-secure-response' }
+    ];
+
+    arr.forEach((el) => {
+        document.getElementById(el.endpoint + '-btn').addEventListener('click', async () => {
+            let text;
+            try {
+                const response = await fetch(`${el.host}/${el.endpoint}`);
+                text = await response.text();
+            } catch (e) {
+                text = e.message;
+            }
+            document.getElementById(el.endpoint + '-result').innerText = `${el.endpoint}: ${text}`;
+            console.log(text);
+        });
+    });
+</script>
+</body>
