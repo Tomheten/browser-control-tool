@@ -17,7 +17,7 @@
   ],
   "files": [
     "dist",
-    "src",
+    "widgets/src",
     "README.md",
     "LICENSE"
   ],
@@ -32,8 +32,13 @@
     "playwright"
   ],
   "scripts": {
+    "vite": "vite",
+    "vue-tsc": "vue-tsc",
     "dev": "vite",
-    "build": "vite build",
+    "dev:widgets": "vite --config ./widgets/vite.build-widgets.config.ts",
+    "build:lib": "vite build --config ./vite.build-lib.config.ts",
+    "build:widgets": "node widgets/build-widgets.ts",
+    "build": "vue-tsc -b && vite build",
     "test": "vitest run",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write ."
@@ -46,10 +51,16 @@
   },
   "devDependencies": {
     "eslint": "^9.39.1",
-    "prettier": "^3.7.3",
     "typescript": "^5.9.0",
     "vite": "^7.2.4",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^4.0.14"
+    "vitest": "^4.0.14",
+    "vue": "^3.5.25",
+    "vuetify": "^3.11.2",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "@vue/tsconfig": "^0.8.1",
+    "vue-tsc": "^3.1.5",
+    "vite-node": "^5.2.0",
+    "vite-plugin-checker": "^0.11.0"
   }
 }
