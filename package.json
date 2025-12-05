@@ -38,7 +38,8 @@
     "dev:widgets": "vite --config ./widgets/vite.build-widgets.config.ts",
     "build:lib": "vite build --config ./vite.build-lib.config.ts",
     "build:widgets": "node widgets/build-widgets.ts",
-    "build": "vue-tsc -b && vite build",
+    "vite-node": "vite-node",
+    "run": "vite-node ./run.ts",
     "test": "vitest run",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write ."
@@ -61,6 +62,7 @@
     "@vue/tsconfig": "^0.8.1",
     "vue-tsc": "^3.1.5",
     "vite-node": "^5.2.0",
+    "@playwright/test": "^1.57.0",
     "vite-plugin-checker": "^0.11.0"
   }
 }
