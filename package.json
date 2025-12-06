@@ -6,8 +6,14 @@
     "url": "https://github.com/Tomheten"
   },
   "license": "MIT",
-  "main": "dist/browser-control-tool.umd.js",
-  "module": "dist/browser-control-tool.es.js",
+  "main": "dist/browser-control-tool.cjs.js",
+  "module": "dist/browser-control-tool.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/browser-control-tool.esm.js",
+      "require": "./dist/browser-control-tool.cjs.js"
+    }
+  },
   "types": "dist/index.d.ts",
   "contributors": [
     {
@@ -17,7 +23,7 @@
   ],
   "files": [
     "dist",
-    "widgets/src",
+    "widgets/dist",
     "README.md",
     "LICENSE"
   ],
@@ -27,7 +33,6 @@
   "keywords": [
     "vite",
     "typescript",
-    "library",
     "browser",
     "playwright"
   ],
@@ -39,7 +44,7 @@
     "build:lib": "vite build --config ./vite.build-lib.config.ts",
     "build:widgets": "node widgets/build-widgets.ts",
     "vite-node": "vite-node",
-    "run": "vite-node ./run.ts",
+    "run": "vite-node playwright/run.ts",
     "test": "vitest run",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write ."
@@ -49,6 +54,10 @@
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.57.0",
+    "playwright": "^1.57.0"
   },
   "devDependencies": {
     "eslint": "^9.39.1",
@@ -62,7 +71,6 @@
     "@vue/tsconfig": "^0.8.1",
     "vue-tsc": "^3.1.5",
     "vite-node": "^5.2.0",
-    "@playwright/test": "^1.57.0",
     "vite-plugin-checker": "^0.11.0"
   }
 }

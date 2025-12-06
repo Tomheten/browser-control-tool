@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "target": "esnext"
+  },
+  "files": [],
+  "references": [
+  ]
+}
