@@ -2,8 +2,8 @@ import { join }                 from 'path';
 import type { Page }            from 'playwright';
 
 type PWModule = typeof import('playwright');
-import { fileURLToPath }        from 'url';
-import { dirname as dirnameFn } from 'path';
+import { fileURLToPath }      from 'url';
+import { dirname } from 'path';
 
 
 let targetPage: Page;
@@ -39,8 +39,9 @@ export async function runWidgets(path: string): Promise<void> {
 
     //@ts-ignore
     const filename = fileURLToPath(import.meta.url);
-    const dirname = dirnameFn(filename);
-    const widgetsHtml = join(dirname, 'widgets', 'dist', 'index-dist.html');
+    // TODO: rewrite by `import.meta.dirname`
+    const __dirname = dirname(filename);
+    const widgetsHtml = join(__dirname, 'widgets', 'dist', 'index-dist.html');
 
     let browserPath = '';
     page.addListener('console', async (consoleMessage) => {

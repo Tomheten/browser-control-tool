@@ -47,7 +47,8 @@
     "run": "vite-node playwright/run.ts",
     "test": "vitest run",
     "lint": "eslint . --ext .ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepublishOnly": "node scripts/prepublish.mts"
   },
   "prettier": {
     "printWidth": 80,
