@@ -8,6 +8,8 @@ import 'vuetify/styles';
 import * as components   from 'vuetify/components';
 import * as directives   from 'vuetify/directives';
 
+
+// TODO: add icons set
 // Тема и иконки можно подключить по желанию
 const vuetify = createVuetify({
     components,

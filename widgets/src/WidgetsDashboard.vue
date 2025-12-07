@@ -1,50 +1,82 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-
-// import HelloWorld from './components/HelloWorld.vue'
-//import HelloWorld from './components/HelloWorld.vue';
-
-let browserPath = '';
-
-function sendPath() {
-  console.dirxml('dev_action browser_path ' + browserPath);
-}
-
-function onChange(path: string) {
-  browserPath = path;
-}
-
-function runBrowser() {
-  console.dirxml('dev_action run_browser ' + browserPath);
-}
-
-function addDiv() {
-  console.dirxml('dev_action add_div');
-}
-</script>
-
 <template>
-  <v-text-field label="browser-path" @input="onChange($event.target.value)" />
-  <v-btn @click="sendPath">send path</v-btn>
-  <v-btn @click="runBrowser()">run browser</v-btn>
-  <v-btn @click="addDiv()">add div</v-btn>
+  <v-app>
+    <v-container fluid>
+      <v-row>
+        <v-col cols="3">
+          <WidgetPalette
+              :available="availableWidgets"
+              @dragstart-widget="onDragStartFromPalette"
+          />
+        </v-col>
 
-  <!--  <HelloWorld/>-->
+        <v-col cols="9">
+          <WidgetCanvas
+              :registry="registry"
+              :placed="placedWidgets"
+              @drop-widget="onDropWidget"
+              @remove-widget="onRemoveWidget"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup>
+import { ref } from 'vue'
+import WidgetPalette from './WidgetPalette.vue'
+import WidgetCanvas from './WidgetCanvas.vue'
+import SimpleWidget from './SimpleWidget.vue'
+
+/* Регистрируем доступные типы компонентов */
+const registry = {
+  SimpleWidget
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+/* Начальный список доступных виджетов (показывается в палете) */
+const availableWidgets = ref([
+  { type: 'SimpleWidget', name: 'Простой виджет' }
+])
+
+/* Список размещённых виджетов на холсте */
+const placedWidgets = ref([])
+
+/* Обработчик dragstart, проксируемый из палеты (не обязателен, но оставлен для примера) */
+function onDragStartFromPalette(type) {
+  // В этом примере dragstart обрабатывается в палете напрямую через dataTransfer,
+  // но мы оставляем хук на случай расширения логики.
+  // Ничего не делаем здесь.
 }
 
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+/* При drop — создаём виджет и удаляем его из availableWidgets */
+function onDropWidget(type) {
+  // Защита: если тип уже не доступен — игнорируем
+  const idx = availableWidgets.value.findIndex(w => w.type === type)
+  if (idx === -1) return
+
+  // Создаём экземпляр виджета
+  placedWidgets.value.push({
+    id: Date.now() + Math.random(),
+    type,
+    props: {}
+  })
+
+  // Убираем из палеты
+  availableWidgets.value.splice(idx, 1)
 }
-</style>
+
+/* При удалении карточки — удаляем из placed и возвращаем в палету */
+function onRemoveWidget(widgetId) {
+  const idx = placedWidgets.value.findIndex(w => w.id === widgetId)
+  if (idx === -1) return
+  const [removed] = placedWidgets.value.splice(idx, 1)
+
+  // Вернуть тип в палету (если там ещё нет такого типа)
+  const exists = availableWidgets.value.some(w => w.type === removed.type)
+  if (!exists) {
+    // Можно вернуть с именем; в реальном приложении храните маппинг type->name
+    const name = removed.type === 'SimpleWidget' ? 'Простой виджет' : removed.type
+    availableWidgets.value.push({ type: removed.type, name })
+  }
+}
+</script>
