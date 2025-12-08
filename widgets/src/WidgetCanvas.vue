@@ -21,13 +21,12 @@ import { defineProps } from 'vue'
 import WidgetCard from './WidgetCard.vue'
 
 const props = defineProps({
-  registry: { type: Object, required: true },
-  placed: { type: Array, required: true }
+  registry: {type: Object, required: true},
+  placed: {type: Array, required: true}
 })
 const emit = defineEmits(['drop-widget', 'remove-widget'])
 
 function onDragOver(e) {
-  // можно добавить визуальную подсказку
 }
 
 function onDrop(e) {
@@ -48,6 +47,7 @@ function onCloseCard(widgetId) {
   padding: 12px;
   border-radius: 6px;
 }
+
 .cards {
   display: flex;
   gap: 12px;

@@ -1,5 +1,31 @@
 <template>
   <v-app>
+    <v-container>
+      <v-row>
+        <v-col cols="12" class="d-flex align-center gap-4">
+          <!-- Кнопка "Создать профиль" -->
+          <v-btn size="small" color="secondary" @click="createProfile">
+            create profile
+          </v-btn>
+
+          <!-- Выпадающий список профилей -->
+          <v-select
+              v-model="selectedProfile"
+              :items="profiles"
+              label="Profiles"
+              variant="outlined"
+              density="compact"
+              style="max-width: 200px"
+          />
+          <!-- Кнопка "Save" -->
+          <v-btn size="small" prepend-icon="save">save</v-btn>
+        </v-col>
+
+        <!--        <v-spacer/>-->
+        <!--        <div>profile</div>-->
+      </v-row>
+    </v-container>
+    <v-divider thickness="5"></v-divider>
     <v-container fluid>
       <v-row>
         <v-col cols="3">
@@ -23,19 +49,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { inject, provide, ref } from 'vue'
 import WidgetPalette from './WidgetPalette.vue'
 import WidgetCanvas from './WidgetCanvas.vue'
-import SimpleWidget from './SimpleWidget.vue'
+import NetworkWidget from './NetworkWidget.vue'
+import { WIDGET_STORE_TOKEN, widgetsStoreFactory } from "./widget.store";
+
+const store = widgetsStoreFactory();
+provide(WIDGET_STORE_TOKEN, store);
+
 
 /* Регистрируем доступные типы компонентов */
 const registry = {
-  SimpleWidget
+  SimpleWidget: NetworkWidget
 }
 
 /* Начальный список доступных виджетов (показывается в палете) */
 const availableWidgets = ref([
-  { type: 'SimpleWidget', name: 'Простой виджет' }
+  {type: 'NetworkWidget', name: 'network widget'}
 ])
 
 /* Список размещённых виджетов на холсте */
@@ -75,8 +106,8 @@ function onRemoveWidget(widgetId) {
   const exists = availableWidgets.value.some(w => w.type === removed.type)
   if (!exists) {
     // Можно вернуть с именем; в реальном приложении храните маппинг type->name
-    const name = removed.type === 'SimpleWidget' ? 'Простой виджет' : removed.type
-    availableWidgets.value.push({ type: removed.type, name })
+    const name = removed.type === 'NetworkWidget' ? 'network widget' : removed.type
+    availableWidgets.value.push({type: removed.type, name})
   }
 }
 </script>

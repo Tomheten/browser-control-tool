@@ -1,24 +1,23 @@
 <template>
   <v-card style="width: 320px;">
-    <v-toolbar dense flat>
-      <v-toolbar-title class="text-subtitle-1">{{ widget.type }}</v-toolbar-title>
-      <v-spacer />
-      <v-btn icon small @click="close">
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
+    <v-toolbar height="25">
+      <div>{{ widget.type }}</div>
+      <v-spacer/>
+      <v-icon size="small" @click="close">x-circle</v-icon>
     </v-toolbar>
 
     <v-card-text>
-      <component :is="resolvedComponent" v-bind="widget.props" />
+      <component :is="resolvedComponent" v-bind="widget.props"/>
     </v-card-text>
   </v-card>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+
 const props = defineProps({
-  widget: { type: Object, required: true },
-  registry: { type: Object, required: true }
+  widget: {type: Object, required: true},
+  registry: {type: Object, required: true}
 })
 const emit = defineEmits(['close'])
 

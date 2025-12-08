@@ -1,6 +1,6 @@
 <template>
-  <v-card>
-    <v-card-title>Палета виджетов</v-card-title>
+  <v-card height="80vh">
+    <v-card-title>Widgets</v-card-title>
     <v-list dense>
       <v-list-item
           v-for="w in available"
@@ -11,16 +11,14 @@
         <v-list-item-content>{{ w.name }}</v-list-item-content>
       </v-list-item>
 
-      <v-list-item v-if="available.length === 0">
-        <v-list-item-content class="text--disabled">Нет доступных виджетов</v-list-item-content>
-      </v-list-item>
+      <v-list-item v-if="available.length === 0"></v-list-item>
     </v-list>
   </v-card>
 </template>
 
 <script setup>
 const props = defineProps({
-  available: { type: Array, required: true }
+  available: {type: Array, required: true}
 })
 const emit = defineEmits(['dragstart-widget'])
 
