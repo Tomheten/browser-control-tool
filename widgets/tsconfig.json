@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "types": [
+      "vuetify"
+    ],
+    "moduleResolution": "node",
+    "module": "esnext",
+    "target": "esnext"
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
-# W.I.P.
+# W.I.P. 
+## ONLY Chromium-based while
 
-# Widgets for control browser
+# control browser
