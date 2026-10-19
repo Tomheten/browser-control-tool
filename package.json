@@ -8,6 +8,10 @@
   "license": "MIT",
   "main": "dist/browser-control-tool.cjs.js",
   "module": "dist/browser-control-tool.esm.js",
+  "bin": {
+    "browser-control-tool": "./bin/cli.js",
+    "bct": "./bin/cli.js"
+  },
   "exports": {
     ".": {
       "import": "./dist/browser-control-tool.esm.js",
