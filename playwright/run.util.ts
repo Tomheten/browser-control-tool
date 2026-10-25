@@ -1,9 +1,10 @@
-import { join }                 from 'path';
-import type { Page }            from 'playwright';
+import { join } from 'path';
+//@ts-ignore
+import { dirname } from 'path';
+import type { Page } from 'playwright';
+import { fileURLToPath } from 'url';
 
 type PWModule = typeof import('playwright');
-import { fileURLToPath }      from 'url';
-import { dirname } from 'path';
 
 
 let targetPage: Page;
@@ -44,31 +45,31 @@ export async function runWidgets(path: string): Promise<void> {
     const widgetsHtml = join(__dirname, 'widgets', 'dist', 'index-dist.html');
 
     let browserPath = '';
-    page.addListener('console', async (consoleMessage) => {
-        if (consoleMessage.type() === 'dirxml') {
-            const text = consoleMessage.text();
-            if (text.startsWith('dev_action')) {
-                let strings = consoleMessage.text().split(' ');
-                const action = strings[1];
-                if (action === 'browser_path') {
-                    const path = strings[2];
-                    browserPath = path;
-                    console.log('---------------', path);
+    // page.addListener('console', async (consoleMessage) => {
+    //     if (consoleMessage.type() === 'dirxml') {
+    //         const text = consoleMessage.text();
+    //         if (text.startsWith('dev_action')) {
+    //             let strings = consoleMessage.text().split(' ');
+    //             const action = strings[1];
+    //             if (action === 'browser_path') {
+    //                 const path = strings[2];
+    //                 browserPath = path;
+    //                 console.log('---------------', path);
 
-                } else if (action === 'run_browser') {
-                    console.log('---------------', path);
-                    await runBrowser(path, pw.chromium);
-                } else if (action === 'add_div') {
-                    targetPage.evaluate(() => {
-                        const div = document.createElement('div');
-                        div.innerText = 'div is created from widgets dashboard';
-                        div.setAttribute('style', 'z-index: 10000; border: 2px solid red; background: green;');
-                        document.body.prepend(div);
-                    });
-                }
-            }
-        }
-    });
+    //             } else if (action === 'run_browser') {
+    //                 console.log('---------------', path);
+    //                 await runBrowser(path, pw.chromium);
+    //             } else if (action === 'add_div') {
+    //                 targetPage.evaluate(() => {
+    //                     const div = document.createElement('div');
+    //                     div.innerText = 'div is created from widgets dashboard';
+    //                     div.setAttribute('style', 'z-index: 10000; border: 2px solid red; background: green;');
+    //                     document.body.prepend(div);
+    //                 });
+    //             }
+    //         }
+    //     }
+    // });
 
     context.on('page', async (page: Page) => {
         console.log('---- autoclose page');

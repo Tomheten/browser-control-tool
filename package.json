@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2",
+  "version": "0.0.21",
   "name": "@tomheten/browser-control-tool",
   "author": {
     "name": "Boris Medoshin",
@@ -8,15 +8,15 @@
   "license": "MIT",
   "main": "dist/browser-control-tool.cjs.js",
   "module": "dist/browser-control-tool.esm.js",
-  "bin": {
-    "browser-control-tool": "./bin/cli.js",
-    "bct": "./bin/cli.js"
-  },
   "exports": {
     ".": {
       "import": "./dist/browser-control-tool.esm.js",
       "require": "./dist/browser-control-tool.cjs.js"
     }
+  },
+  "bin": {
+    "browser-control-tool": "./bin/cli.js",
+    "bctool": "./bin/cli.js"
   },
   "types": "dist/index.d.ts",
   "contributors": [
@@ -26,6 +26,7 @@
     }
   ],
   "files": [
+    "bin",
     "dist",
     "widgets/dist",
     "README.md",
@@ -35,8 +36,8 @@
     "node": ">=24"
   },
   "keywords": [
-    "vite",
-    "typescript",
+    "report",
+    "tool",
     "browser",
     "playwright"
   ],
@@ -44,9 +45,9 @@
     "vite": "vite",
     "vue-tsc": "vue-tsc",
     "dev": "vite",
-    "dev:widgets": "vite --config ./widgets/vite.build-ui.config.ts",
+    "dev:ui": "vite --config ./widgets/vite.build-ui.config.ts",
     "build:lib": "vite build --config ./vite.build-lib.config.ts",
-    "build:widgets": "node widgets/build-ui.ts",
+    "build:ui": "node widgets/build-ui.ts",
     "vite-node": "vite-node",
     "run": "vite-node playwright/run.ts",
     "test": "vitest run",

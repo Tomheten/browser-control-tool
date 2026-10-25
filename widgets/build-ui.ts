@@ -15,7 +15,7 @@ const __dirname = dirname(__filename);
 const viteConfig = join(__dirname, 'vite.build-widgets.config.ts');
 // child_process.execSync('npm exec -- vue-tsc -- -b', { stdio: 'inherit', cwd: join(__dirname, '..') });
 // child_process.execSync('npm run vue-tsc', {stdio: 'inherit'});
-child_process.execSync('npm run vite build -- --config ' + viteConfig, { stdio: 'inherit' });
+child_process.execSync('npm run vite build -- --config ' + `"${viteConfig}"`, { stdio: 'inherit' });
 
 const indexHtmlSrc = join(__dirname, 'index-dist.html');
 const indexHtmlDest = join(__dirname, 'dist', 'index-dist.html');

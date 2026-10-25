@@ -26,7 +26,7 @@ export default defineConfig({
             formats: ['cjs', 'es'],
             entry: path.resolve(__dirname, 'playwright/run.util.ts'),
             name: 'BrowserControlTool',
-            fileName: (format) => `browser-control-tool.${format}.js`,
+            fileName: (format) => `browser-control-tool.${format === 'es' ? 'esm' : 'cjs'}.js`,
         },
     },
 });

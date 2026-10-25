@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process'
 import { cpSync }   from "fs";
 import { join }     from 'node:path'
 
-// execSync('npm run build:widgets && npm run build:lib', {stdio: 'inherit'});
+execSync('npm run build:ui && npm run build:lib', {stdio: 'inherit'});
 
 const __dirname = import.meta.dirname;
 const widgetsDistSrc = join(__dirname, '..', 'widgets', 'dist');
